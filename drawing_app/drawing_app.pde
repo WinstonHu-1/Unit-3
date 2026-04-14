@@ -8,14 +8,15 @@ color slateGray = #2D2D30; //Toolbars
 color darkGreen = #88A096; // Accents/ tactile
 color softSilver = #E1E1E1; // Text/ icons
 int fillColour = 0;
-
+int sliderX = 420;
+float strokeWidth = 2;
 
 
 void setup() {
   size (1200, 700);
   background(paperWhite);
   grello = loadImage("grello.png");
-  selectedColour = darkGreen;
+  selectedColour = #000000;
 }
 
 void draw() {
@@ -63,16 +64,18 @@ void draw() {
   fill(deepCharcoal);
   strokeWeight(1);
   stroke(softSilver);
-  circle(420,80,30);
+  circle(sliderX,80,30);
 }
 
 void mouseDragged() {
-  if (grelloOn == false) {
+  if (grelloOn == false && mouseY >150) {
     stroke(selectedColour);
+    strokeWeight(strokeWidth);
     line(pmouseX, pmouseY, mouseX, mouseY);
   } else {
-    image(grello, mouseX, mouseY, 220, 100);
+  //  image(grello, mouseX, mouseY, 220, 100);
   }
+  sliderControl();
 }
 
 
@@ -83,11 +86,13 @@ void mouseReleased() {
     colourChange(160,100,#FFFF14);
     colourChange(220,50,#FB4D07);
     colourChange(220,110,#FF00FF);
-    colourChange(280,50,#000000);
-    colourChange(280,110,#FF00FF);
+    colourChange(280,50,#4F138D);
+    colourChange(280,110,#000000);
     colourChange(340,50,#FFFFFF);
     colourChange(340,110,#511C01);
-}
+    sliderControl();
+  }
+
 
 void tactile (int x, int y, int w, int h) {
   if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h) {
@@ -109,4 +114,11 @@ void colourChange( int x, int y, color colour) {
   if (dist(x, y, mouseX, mouseY) <25) {
     selectedColour = colour;
   }
+}
+
+void sliderControl() {
+  if(mouseX > 420 && mouseX <630 && mouseY >70 && mouseY <90  ) {
+    sliderX = mouseX;
+  }
+  strokeWidth = map(sliderX, 420, 630, 1, 100);
 }
