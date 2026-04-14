@@ -1,5 +1,7 @@
 PImage grello;
 boolean grelloOn = false;
+PImage rb19;
+boolean rb19On = false;
 
 color selectedColour = #000000;
 color paperWhite = #FDFDFD; // Canvas Background
@@ -12,21 +14,32 @@ int sliderX = 420;
 float strokeWidth = 2;
 
 
+
 void setup() {
   size (1200, 700);
   background(paperWhite);
   grello = loadImage("grello.png");
+  rb19 = loadImage("rb19.png");
   selectedColour = #000000;
 }
 
 void draw() {
+  // tool bar
+
   fill(slateGray);
   noStroke();
   rect(0, 0, 1200, 150);
   fill(selectedColour);
-  tactile(50, 50, 220, 120);
-  //rect(50, 50, 220, 120);
-  //image(grello, 50, 50, 220, 100);
+  tactile(800, 50, 110, 60);
+  rect(800, 50, 110, 60);
+  image(grello, 800, 50, 110, 50);
+  tactile(920, 50, 160, 60);
+  rect(920, 50, 160, 60);
+  image(rb19, 920, 55, 150, 50);
+
+
+  // colour selection buttons
+
   strokeWeight(1);
   fill(#FF0000);
   circleTactile( 100, 50);
@@ -59,39 +72,73 @@ void draw() {
   circleTactile(340, 110);
   circle(340, 110, 50);
   stroke(softSilver);
+
+  // slider
+
+
   strokeWeight(15);
   line(420, 80, 630, 80);
   fill(deepCharcoal);
   strokeWeight(1);
   stroke(softSilver);
-  circle(sliderX,80,30);
+  circle(sliderX, 80, 30);
+
+  fill(softSilver);
+  // thickness display
+  rect (680, 68, 98, 25);
+  fill(deepCharcoal);
+  noStroke();
+  rect(680, 68, strokeWidth, 26);
 }
 
 void mouseDragged() {
-  if (grelloOn == false && mouseY >150) {
+  if (grelloOn == true && mouseY >150) {
+    image(grello, mouseX, mouseY, 110, 50);    
+  } 
+  else if (rb19On == true && mouseY >150) {
+    image(rb19, mouseX, mouseY, 150, 50); 
+  }
+  
+  else if (mouseY >150){
     stroke(selectedColour);
     strokeWeight(strokeWidth);
     line(pmouseX, pmouseY, mouseX, mouseY);
-  } else {
-  //  image(grello, mouseX, mouseY, 220, 100);
+
+   
   }
   sliderControl();
 }
 
+void mousePressed() {
+  if (grelloOn == true ) {
+    image(grello, mouseX, mouseY, 110, 50);
+  }
+  else if (rb19On == true) {
+    image(rb19, mouseX, mouseY, 150, 50);
+  }
+}
 
 void mouseReleased() {
-    colourChange(100,50,#FF0000);
-    colourChange(100,110,#00FF00);
-    colourChange(160,50,#0000FF);
-    colourChange(160,100,#FFFF14);
-    colourChange(220,50,#FB4D07);
-    colourChange(220,110,#FF00FF);
-    colourChange(280,50,#4F138D);
-    colourChange(280,110,#000000);
-    colourChange(340,50,#FFFFFF);
-    colourChange(340,110,#511C01);
-    sliderControl();
+  colourChange(100, 50, #FF0000);
+  colourChange(100, 110, #00FF00);
+  colourChange(160, 50, #0000FF);
+  colourChange(160, 100, #FFFF14);
+  colourChange(220, 50, #FB4D07);
+  colourChange(220, 110, #FF00FF);
+  colourChange(280, 50, #4F138D);
+  colourChange(280, 110, #000000);
+  colourChange(340, 50, #FFFFFF);
+  colourChange(340, 110, #511C01);
+  sliderControl();
+  if (mouseX > 800 && mouseX < 910 && mouseY > 50 && mouseY < 110 && grelloOn == false ) {
+    grelloOn = true;
   }
+    if (mouseX > 800 && mouseX < 910 && mouseY > 50 && mouseY < 110 && grelloOn == false ) {
+    rb19On = true;
+  }
+}
+
+
 
 
 void tactile (int x, int y, int w, int h) {
@@ -113,11 +160,12 @@ void circleTactile( int x, int y) {
 void colourChange( int x, int y, color colour) {
   if (dist(x, y, mouseX, mouseY) <25) {
     selectedColour = colour;
+    grelloOn = false;
   }
 }
 
 void sliderControl() {
-  if(mouseX > 420 && mouseX <630 && mouseY >70 && mouseY <90  ) {
+  if (mouseX > 420 && mouseX <630 && mouseY >70 && mouseY <90  ) {
     sliderX = mouseX;
   }
   strokeWidth = map(sliderX, 420, 630, 1, 100);
