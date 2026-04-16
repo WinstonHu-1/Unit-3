@@ -16,7 +16,7 @@ float strokeWidth = 2;
 
 //images
 void setup() {
-  size (1200, 700);
+  size (1200, 700, P2D);
   background(paperWhite);
   grello = loadImage("grello.png");
   rb19 = loadImage("rb19.png");
@@ -104,10 +104,10 @@ void draw() {
 
 void mouseDragged() {
   if (grelloOn == true && mouseY >150) {
-    image(grello, mouseX, mouseY, map(sliderX, 420, 630, 110, 220), map(sliderX, 420, 630, 50, 100));
+    image(grello, mouseX-50, mouseY-25, map(sliderX, 420, 630, 110, 220), map(sliderX, 420, 630, 50, 100));
   } else if (rb19On == true && mouseY >150) {
     
-    image(rb19, mouseX, mouseY,  map(sliderX, 420, 630, 150, 300), map(sliderX, 420, 630, 50, 100));
+    image(rb19, mouseX-50, mouseY-25,  map(sliderX, 420, 630, 150, 300), map(sliderX, 420, 630, 50, 100));
   } else if (mouseY >150) {
     stroke(selectedColour);
     strokeWeight(strokeWidth);
@@ -118,10 +118,10 @@ void mouseDragged() {
 
 void mousePressed() {
   if (grelloOn == true ) {
-    image(grello, mouseX, mouseY, map(sliderX, 420, 630, 110, 220), map(sliderX, 420, 630, 50, 100));
+    image(grello, mouseX-50, mouseY-25, map(sliderX, 420, 630, 110, 220), map(sliderX, 420, 630, 50, 100));
   }
   if (rb19On == true) {
-    image(rb19, mouseX, mouseY,  map(sliderX, 420, 630, 150, 300), map(sliderX, 420, 630, 50, 100));
+    image(rb19, mouseX-50, mouseY-25,  map(sliderX, 420, 630, 150, 300), map(sliderX, 420, 630, 50, 100));
   }
 }
 
