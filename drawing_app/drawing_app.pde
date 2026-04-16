@@ -21,7 +21,6 @@ void setup() {
   grello = loadImage("grello.png");
   rb19 = loadImage("rb19.png");
   selectedColour = #000000;
-  
 }
 
 void draw() {
@@ -38,11 +37,11 @@ void draw() {
   rect(920, 50, 160, 60);
   image(rb19, 920, 55, 150, 50);
   fill(softSilver);
-  tactile(1120,30,50,20);
+  tactile(1120, 30, 50, 20);
   rect( 1120, 30, 50, 20);
-  tactile(1120,70,50,20);
+  tactile(1120, 70, 50, 20);
   rect( 1120, 70, 50, 20);
-  tactile(1120,110,50,20);
+  tactile(1120, 110, 50, 20);
   rect( 1120, 110, 50, 20);
   fill(0);
   textSize(20);
@@ -97,20 +96,18 @@ void draw() {
 
   fill(softSilver);
   // thickness display
-  rect (680, 68, 98, 25);
+  rect (680, 68, 97, 25);
   fill(deepCharcoal);
   noStroke();
-  rect(680, 68, strokeWidth, 26);
-  
-  
-  
+  rect(679, 67, strokeWidth, 27);
 }
 
 void mouseDragged() {
   if (grelloOn == true && mouseY >150) {
-    image(grello, mouseX, mouseY, 110, 50);
+    image(grello, mouseX, mouseY, map(sliderX, 420, 630, 110, 220), map(sliderX, 420, 630, 50, 100));
   } else if (rb19On == true && mouseY >150) {
-    image(rb19, mouseX, mouseY, 150, 50);
+    
+    image(rb19, mouseX, mouseY,  map(sliderX, 420, 630, 150, 300), map(sliderX, 420, 630, 50, 100));
   } else if (mouseY >150) {
     stroke(selectedColour);
     strokeWeight(strokeWidth);
@@ -121,9 +118,10 @@ void mouseDragged() {
 
 void mousePressed() {
   if (grelloOn == true ) {
-    image(grello, mouseX, mouseY, 110, 50);
-  }  if (rb19On == true) {
-    image(rb19, mouseX, mouseY, 150, 50);
+    image(grello, mouseX, mouseY, map(sliderX, 420, 630, 110, 220), map(sliderX, 420, 630, 50, 100));
+  }
+  if (rb19On == true) {
+    image(rb19, mouseX, mouseY,  map(sliderX, 420, 630, 150, 300), map(sliderX, 420, 630, 50, 100));
   }
 }
 
@@ -143,9 +141,23 @@ void mouseReleased() {
   if (mouseX > 800 && mouseX < 910 && mouseY > 50 && mouseY < 110 && grelloOn == false ) {
     grelloOn = true;
     rb19On = false;
-  }  if (mouseX > 920 && mouseX < 1070 && mouseY > 55 && mouseY < 110 && rb19On == false ) {
+  }
+  if (mouseX > 920 && mouseX < 1070 && mouseY > 55 && mouseY < 110 && rb19On == false ) {
     rb19On = true;
     grelloOn = false;
+  }
+
+  if (mouseX > 1120 && mouseX < 1170 && mouseY > 30 && mouseY < 50) {
+    background(paperWhite);
+  }
+
+
+  if (mouseX > 1120 && mouseX < 1170 && mouseY > 70 && mouseY < 90) {
+    selectOutput("Choose a name for your drawing", "saveImage");
+  }
+
+  if (mouseX > 1120 && mouseX < 1170 && mouseY > 110 && mouseY < 130) {
+    selectInput("Pick an image to load", "openImage");
   }
 }
 
@@ -175,6 +187,25 @@ void colourChange( int x, int y, color colour) {
     rb19On = false;
   }
 }
+
+void saveImage(File f) {
+  if (f!= null) {
+    PImage canvas = get( 0, 150, width, height-150);
+    canvas.save(f.getAbsolutePath());
+  }
+}
+
+void openImage(File f) {
+  if (f != null) {
+    int n = 0;
+    while (n <100) {
+      PImage pic = loadImage(f.getPath());
+      image(pic, 0, 0);
+      n = n+1;
+    }
+  }
+}
+
 
 void sliderControl() {
   if (mouseX > 420 && mouseX <630 && mouseY >70 && mouseY <90  ) {
