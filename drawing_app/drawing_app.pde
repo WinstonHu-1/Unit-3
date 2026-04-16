@@ -14,13 +14,14 @@ int sliderX = 420;
 float strokeWidth = 2;
 
 
-
+//images
 void setup() {
   size (1200, 700);
   background(paperWhite);
   grello = loadImage("grello.png");
   rb19 = loadImage("rb19.png");
   selectedColour = #000000;
+  
 }
 
 void draw() {
@@ -36,7 +37,18 @@ void draw() {
   tactile(920, 50, 160, 60);
   rect(920, 50, 160, 60);
   image(rb19, 920, 55, 150, 50);
-
+  fill(softSilver);
+  tactile(1120,30,50,20);
+  rect( 1120, 30, 50, 20);
+  tactile(1120,70,50,20);
+  rect( 1120, 70, 50, 20);
+  tactile(1120,110,50,20);
+  rect( 1120, 110, 50, 20);
+  fill(0);
+  textSize(20);
+  text("new", 1127, 45);
+  text("save", 1127, 85);
+  text("load", 1127, 125);
 
   // colour selection buttons
 
@@ -89,22 +101,20 @@ void draw() {
   fill(deepCharcoal);
   noStroke();
   rect(680, 68, strokeWidth, 26);
+  
+  
+  
 }
 
 void mouseDragged() {
   if (grelloOn == true && mouseY >150) {
-    image(grello, mouseX, mouseY, 110, 50);    
-  } 
-  else if (rb19On == true && mouseY >150) {
-    image(rb19, mouseX, mouseY, 150, 50); 
-  }
-  
-  else if (mouseY >150){
+    image(grello, mouseX, mouseY, 110, 50);
+  } else if (rb19On == true && mouseY >150) {
+    image(rb19, mouseX, mouseY, 150, 50);
+  } else if (mouseY >150) {
     stroke(selectedColour);
     strokeWeight(strokeWidth);
     line(pmouseX, pmouseY, mouseX, mouseY);
-
-   
   }
   sliderControl();
 }
@@ -112,12 +122,12 @@ void mouseDragged() {
 void mousePressed() {
   if (grelloOn == true ) {
     image(grello, mouseX, mouseY, 110, 50);
-  }
-  else if (rb19On == true) {
+  }  if (rb19On == true) {
     image(rb19, mouseX, mouseY, 150, 50);
   }
 }
 
+//buttons
 void mouseReleased() {
   colourChange(100, 50, #FF0000);
   colourChange(100, 110, #00FF00);
@@ -132,9 +142,10 @@ void mouseReleased() {
   sliderControl();
   if (mouseX > 800 && mouseX < 910 && mouseY > 50 && mouseY < 110 && grelloOn == false ) {
     grelloOn = true;
-  }
-    if (mouseX > 800 && mouseX < 910 && mouseY > 50 && mouseY < 110 && grelloOn == false ) {
+    rb19On = false;
+  }  if (mouseX > 920 && mouseX < 1070 && mouseY > 55 && mouseY < 110 && rb19On == false ) {
     rb19On = true;
+    grelloOn = false;
   }
 }
 
@@ -161,6 +172,7 @@ void colourChange( int x, int y, color colour) {
   if (dist(x, y, mouseX, mouseY) <25) {
     selectedColour = colour;
     grelloOn = false;
+    rb19On = false;
   }
 }
 
