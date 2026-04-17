@@ -53,34 +53,34 @@ void draw() {
 
   strokeWeight(1);
   fill(#FF0000);
-  circleTactile( 100, 50);
+  circleTactile( 100, 50,25);
   circle(100, 50, 50);
   fill(#00FF00);
-  circleTactile( 100, 110);
+  circleTactile( 100, 110,25);
   circle(100, 110, 50);
   fill(#0000FF);
-  circleTactile( 160, 50);
+  circleTactile( 160, 50,25);
   circle(160, 50, 50);
   fill(#FFFF14);
-  circleTactile( 160, 110);
+  circleTactile( 160, 110,25);
   circle(160, 110, 50);
   fill(#FB4D07);
-  circleTactile(220, 50);
+  circleTactile(220, 50,25);
   circle(220, 50, 50);
   fill(#FF00FF);
-  circleTactile(220, 110);
+  circleTactile(220, 110,25);
   circle(220, 110, 50);
   fill(#4F138D);
-  circleTactile(280, 50);
+  circleTactile(280, 50,25);
   circle(280, 50, 50);
   fill(#000000);
-  circleTactile(280, 110);
+  circleTactile(280, 110,25);
   circle(280, 110, 50);
   fill(#FFFFFF);
-  circleTactile(340, 50);
+  circleTactile(340, 50,25);
   circle(340, 50, 50);
   fill(#511C01);
-  circleTactile(340, 110);
+  circleTactile(340, 110,25);
   circle(340, 110, 50);
   stroke(softSilver);
 
@@ -91,13 +91,13 @@ void draw() {
   line(420, 80, 630, 80);
   fill(deepCharcoal);
   strokeWeight(1);
-  stroke(softSilver);
+  circleTactile(sliderX,80,15);
   circle(sliderX, 80, 30);
 
   fill(softSilver);
   // thickness display
   rect (680, 68, 97, 25);
-  fill(deepCharcoal);
+  fill(selectedColour);
   noStroke();
   rect(679, 67, strokeWidth, 27);
 }
@@ -172,8 +172,8 @@ void tactile (int x, int y, int w, int h) {
   }
 }
 
-void circleTactile( int x, int y) {
-  if (dist(x, y, mouseX, mouseY) <25) {
+void circleTactile( int x, int y, int r) {
+  if (dist(x, y, mouseX, mouseY) <r) {
     stroke(darkGreen);
   } else {
     stroke(softSilver);
