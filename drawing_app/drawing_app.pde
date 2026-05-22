@@ -9,6 +9,8 @@ color deepCharcoal = #1A1A1B; // App Background
 color slateGray = #2D2D30; //Toolbars
 color darkGreen = #88A096; // Accents/ tactile
 color softSilver = #E1E1E1; // Text/ icons
+//color buttonSelect = softSilver;
+//color buttonSelecta = softSilver;
 int fillColour = 0;
 int sliderX = 420;
 float strokeWidth = 2;
@@ -16,7 +18,8 @@ float strokeWidth = 2;
 
 //images
 void setup() {
-  size (1200, 700, P2D);
+  size (1200, 700);
+  pixelDensity(1);  
   background(paperWhite);
   grello = loadImage("grello.png");
   rb19 = loadImage("rb19.png");
@@ -31,9 +34,16 @@ void draw() {
   rect(0, 0, 1200, 150);
   fill(selectedColour);
   tactile(800, 50, 110, 60);
+  
+   if (grelloOn){ 
+     fill(darkGreen);
+   }
   rect(800, 50, 110, 60);
   image(grello, 800, 50, 110, 50);
   tactile(920, 50, 160, 60);
+  if (rb19On) {
+    fill(darkGreen);
+  }
   rect(920, 50, 160, 60);
   image(rb19, 920, 55, 150, 50);
   fill(softSilver);
@@ -53,34 +63,34 @@ void draw() {
 
   strokeWeight(1);
   fill(#FF0000);
-  circleTactile( 100, 50,25);
+  circleTactile( 100, 50);
   circle(100, 50, 50);
   fill(#00FF00);
-  circleTactile( 100, 110,25);
+  circleTactile( 100, 110);
   circle(100, 110, 50);
   fill(#0000FF);
-  circleTactile( 160, 50,25);
+  circleTactile( 160, 50);
   circle(160, 50, 50);
   fill(#FFFF14);
-  circleTactile( 160, 110,25);
+  circleTactile( 160, 110);
   circle(160, 110, 50);
   fill(#FB4D07);
-  circleTactile(220, 50,25);
+  circleTactile(220, 50);
   circle(220, 50, 50);
   fill(#FF00FF);
-  circleTactile(220, 110,25);
+  circleTactile(220, 110);
   circle(220, 110, 50);
   fill(#4F138D);
-  circleTactile(280, 50,25);
+  circleTactile(280, 50);
   circle(280, 50, 50);
   fill(#000000);
-  circleTactile(280, 110,25);
+  circleTactile(280, 110);
   circle(280, 110, 50);
   fill(#FFFFFF);
-  circleTactile(340, 50,25);
+  circleTactile(340, 50);
   circle(340, 50, 50);
   fill(#511C01);
-  circleTactile(340, 110,25);
+  circleTactile(340, 110);
   circle(340, 110, 50);
   stroke(softSilver);
 
@@ -91,7 +101,7 @@ void draw() {
   line(420, 80, 630, 80);
   fill(deepCharcoal);
   strokeWeight(1);
-  circleTactile(sliderX,80,15);
+  stroke(softSilver);
   circle(sliderX, 80, 30);
 
   fill(softSilver);
@@ -117,10 +127,10 @@ void mouseDragged() {
 }
 
 void mousePressed() {
-  if (grelloOn == true ) {
+  if (grelloOn == true && mouseY >150 ) {
     image(grello, mouseX-50, mouseY-25, map(sliderX, 420, 630, 110, 220), map(sliderX, 420, 630, 50, 100));
   }
-  if (rb19On == true) {
+  if (rb19On == true && mouseY >150) {
     image(rb19, mouseX-50, mouseY-25,  map(sliderX, 420, 630, 150, 300), map(sliderX, 420, 630, 50, 100));
   }
 }
@@ -141,11 +151,17 @@ void mouseReleased() {
   if (mouseX > 800 && mouseX < 910 && mouseY > 50 && mouseY < 110 && grelloOn == false ) {
     grelloOn = true;
     rb19On = false;
-  }
+   // buttonSelect = darkGreen;
+  }  //else {
+   // buttonSelecta = softSilver;
+ // }
   if (mouseX > 920 && mouseX < 1070 && mouseY > 55 && mouseY < 110 && rb19On == false ) {
     rb19On = true;
     grelloOn = false;
-  }
+    //buttonSelecta = darkGreen;
+  } //else {
+   // buttonSelect = softSilver;
+ // }
 
   if (mouseX > 1120 && mouseX < 1170 && mouseY > 30 && mouseY < 50) {
     background(paperWhite);
@@ -172,8 +188,8 @@ void tactile (int x, int y, int w, int h) {
   }
 }
 
-void circleTactile( int x, int y, int r) {
-  if (dist(x, y, mouseX, mouseY) <r) {
+void circleTactile( int x, int y) {
+  if (dist(x, y, mouseX, mouseY) <25) {
     stroke(darkGreen);
   } else {
     stroke(softSilver);
@@ -198,9 +214,9 @@ void saveImage(File f) {
 void openImage(File f) {
   if (f != null) {
     int n = 0;
-    while (n <100) {
+    while (n <10) {
       PImage pic = loadImage(f.getPath());
-      image(pic, 0, 0);
+      image(pic, 0, 150);
       n = n+1;
     }
   }
