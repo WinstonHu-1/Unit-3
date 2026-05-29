@@ -11,16 +11,19 @@ color deepCharcoal = #1A1A1B;
 color slateGray = #2D2D30; 
 color darkGreen = #88A096; 
 color softSilver = #E1E1E1; 
-PImage nathan;
-PImage monkey;
-boolean nathanOn = false;
-boolean monkeyOn = false;
+PImage target1;
+boolean target1On = false;
+PImage target2; 
+boolean target2On = false;
 PImage pauseImg;
 boolean pauseOn = true;
 PImage resumeImg;
 int sliderY = 600;
 float imageSize;
-PImage selectedChar;
+PImage default1;
+PImage selectedChar = default1;
+
+
 
 int mode;
 final int INTRO = 0;
@@ -44,13 +47,15 @@ void setup() {
   pixelDensity(1);
   textAlign(CENTER, CENTER);
   mode = INTRO;
-  nathan = loadImage("nathan.png");
-  monkey = loadImage("monkey.png");
+  target1 = loadImage("target1.png");
+  target2 = loadImage("target2.png");
+  default1 = loadImage("default.png");
   pauseImg = loadImage("pause.png");
   resumeImg = loadImage("resume.png");
+  selectedChar = default1;
   x = width/2;
   y= height/2;
-  d = 100;
+  
   imageMode(CENTER);
   
   vx = random(-10,10);

@@ -1,6 +1,5 @@
 void game() {
 //resumeOn = false;
-
   background (142, 144, 141);
 
   stroke(0);
@@ -12,7 +11,7 @@ void game() {
   fill(77,240,230);
   stroke(0);
   circle(x, y, d);
-  image(selectedChar, x,y);
+  image(selectedChar, x,y, d, d);
   fill(255);
   stroke(0);
   strokeWeight(5);

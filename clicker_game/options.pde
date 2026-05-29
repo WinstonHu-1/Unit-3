@@ -7,10 +7,10 @@ void option() {
   fill(200);
   tactile(100,200,220,220);
   rect(100,200,220,220);
-  image(nathan, 210,330, 220, 220);
+  image(target1, 210,310, 200, 200);
   tactile(385,200,220,220);
   rect(385,200, 220, 220);
-  image(monkey, 500,350, 200 ,350);
+  image(target2, 500,310, 200 ,200);
   textSize(50);
   fill(200);
   tactile(645,670,110,60);
@@ -22,14 +22,15 @@ void option() {
   strokeWeight(7);
   circle(100,sliderY,10);
   line(100, 500, 100, 700);
+  selectedChar = default1;
   
-  if (nathanOn == true) {
-    image(nathan, 400,575,220+imageSize,220+imageSize);
+  if (target1On == true) {
+    image(target1, 400,600,100+imageSize,100+imageSize);
   } else {
    
   }
-  if (monkeyOn == true) {
-     image( monkey, 411, 611, 220+imageSize, 220+imageSize); 
+  if (target2On == true) {
+     image( target2, 400, 600, 100+imageSize, 100+imageSize); 
   }
   
 }
@@ -41,17 +42,17 @@ void mouseDragged() {
 
 void optionsClicks() {
   if (mouseX > 100 && mouseX<320 && mouseY > 200 && mouseY <420) {
-     nathanOn = true;
-     monkeyOn = false;
-     selectedChar= nathan;
+     target1On = true;
+     target2On = false;
+     selectedChar= target1;
   }
     if (mouseX > 385 && mouseX<605 && mouseY > 200 && mouseY <420) {
-     monkeyOn = true;
-     nathanOn = false;
-     selectedChar = monkey;
+     target2On = true;
+     target1On = false;
+     selectedChar = target2;
     }
   if ( mouseX >645 && mouseX < 755 && mouseY > 670 && mouseY <730 ) {
     mode = GAME;
-    d = 220+imageSize;
+    d = 100+imageSize;
   }
 }

@@ -22,6 +22,7 @@ void intro()
   text("Options", CENTER+390, CENTER+480);
 
   theme.play();
+  selectedChar = default1;
 }
 
 void introClicks() {
